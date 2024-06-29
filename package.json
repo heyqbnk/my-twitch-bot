@@ -1,0 +1,12 @@
+{
+  "name": "my-twitch-bot",
+  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "author": "Vladislav Kibenko",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.5.2",
+    "vite": "^5.3.1"
+  }
+}
