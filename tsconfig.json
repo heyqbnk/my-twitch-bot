@@ -9,7 +9,8 @@
     "inlineSources": true,
     "isolatedModules": true,
     "lib": [
-      "esnext"
+      "esnext",
+      "dom"
     ],
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
@@ -25,15 +26,5 @@
     "target": "ESNext",
     "useDefineForClassFields": true
   },
-  "exclude": [
-    "node_modules"
-  ],
-  "include": [
-    "src"
-  ],
-  "references": [
-    {
-      "path": "./tsconfig.vite.json"
-    }
-  ]
+  "exclude": ["node_modules"]
 }
