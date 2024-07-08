@@ -40,7 +40,7 @@ twitchClient.on('redeem', async (
     // Remove trailing spaces.
     .trim()
     // Replace all forbidden symbols with spaces.
-    .replace(/[^\p{L}\s._0-9-]+/gu, ' ')
+    .replace(/[^\p{L}\s.,_0-9-!?]+/gu, ' ')
     // Replace all 2+ spaces with the only one.
     .replace(/\s{2,}/g, ' ');
 
