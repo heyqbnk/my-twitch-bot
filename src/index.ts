@@ -36,7 +36,7 @@ twitchClient.on('redeem', async (
   }
 
   // Format the message.
-  message = message
+  const formattedMessage = message
     // Remove trailing spaces.
     .trim()
     // Replace all forbidden symbols with spaces.
@@ -44,18 +44,25 @@ twitchClient.on('redeem', async (
     // Replace all 2+ spaces with the only one.
     .replace(/\s{2,}/g, ' ');
 
+  console.log('Message before:', message, '\n\nMessage after:', formattedMessage);
+
   // The message should not be empty or exceed the maximum length.
-  if (!message || message.length > maxTextLength) {
+  if (!formattedMessage || formattedMessage.length > maxTextLength) {
     return;
   }
 
   // Request audio chunks.
+  const text = `${username} написал: ${formattedMessage}`;
+  console.log('Going to synthesize text:', text);
+
   const response = await elevenLabsClient.generate({
     // TODO: We can make this voice dynamic.
     voice: 'Rachel',
-    text: `${username} написал: ${message}`,
+    text,
     model_id: 'eleven_multilingual_v2',
   }) as unknown as ReadableStream;
+
+  console.log('Text was synthesized:', text);
 
   // Collect all audio chunks and send them to queue.
   audioQueue.push(await new Response(response).arrayBuffer()).catch(console.error);
