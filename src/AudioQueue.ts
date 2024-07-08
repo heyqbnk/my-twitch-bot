@@ -7,7 +7,7 @@ function wait(timeout: number): Promise<void> {
 }
 
 export class AudioQueue {
-  private readonly queue: ArrayBuffer[][] = [];
+  private readonly queue: ArrayBuffer[] = [];
   private readonly playInterval: number;
   private readonly volume: number;
   private isRunning = false;
@@ -28,11 +28,11 @@ export class AudioQueue {
   }
 
   /**
-   * Adds new audio chunks to play.
-   * @param buffers - audio chunks.
+   * Adds new audio to play.
+   * @param buffer - audio buffer.
    */
-  async push(buffers: ArrayBuffer[]): Promise<void> {
-    this.queue.push(buffers);
+  async push(buffer: ArrayBuffer): Promise<void> {
+    this.queue.push(buffer);
     await this.run();
   }
 
@@ -52,7 +52,7 @@ export class AudioQueue {
     for (i = 0; i < this.queue.length; i++) {
       const audio = new Audio();
       audio.volume = this.volume;
-      audio.src = URL.createObjectURL(new Blob(this.queue[i], { type: 'audio/wav' }));
+      audio.src = URL.createObjectURL(new Blob([this.queue[i]], { type: 'audio/wav' }));
 
       try {
         // Play the audio. The promise will be resolved whenever audio started playing.

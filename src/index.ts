@@ -55,15 +55,10 @@ twitchClient.on('redeem', async (
     voice: 'Rachel',
     text: `${username} написал: ${message}`,
     model_id: 'eleven_multilingual_v2',
-  });
+  }) as unknown as ReadableStream;
 
   // Collect all audio chunks and send them to queue.
-  const buffers: ArrayBuffer[] = [];
-  for await (const data of response) {
-    buffers.push(data);
-  }
-
-  audioQueue.push(buffers).catch(console.error);
+  audioQueue.push(await new Response(response).arrayBuffer()).catch(console.error);
 });
 
 // Connect the Twitch client and start receiving events.
