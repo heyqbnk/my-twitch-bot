@@ -26,5 +26,15 @@
     "target": "ESNext",
     "useDefineForClassFields": true
   },
-  "exclude": ["node_modules"]
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
 }
